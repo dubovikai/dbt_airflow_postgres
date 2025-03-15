@@ -9,6 +9,8 @@ groups:
 
 sources:
   - name: bronze_layer
+    config:
+      group: finance
     description: Bronze schema from DWH
     database: "{{ env_var('PG_DB_NAME') }}"
     schema: bronze
