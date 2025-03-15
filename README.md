@@ -57,3 +57,5 @@ The following aspects were not considered within the scope of this task:
 - Fine-tuning Airflow and PostgreSQL (used with default configurations).
 - Deployment process in a production environment. The manifest file is currently under Git, but it is preferable to parse the project during deployment.
 
+**P.S.: Slack notifications for task failures have been implemented but are currently disabled.**
+
