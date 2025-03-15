@@ -6,6 +6,8 @@ from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 from cosmos import DbtTaskGroup
 from config import DBTConfig
+from on_failure_callbacks import failure_callbacks
+
 
 # Define DAG with optimized parameters
 with DAG(
@@ -14,7 +16,8 @@ with DAG(
     schedule_interval="@daily",
     max_active_runs=1,
     catchup=False,
-    render_template_as_native_obj=True
+    render_template_as_native_obj=True,
+    default_args={"on_failure_callback": failure_callbacks},
 ) as full_update_dag:
 
     # Task: Create the raw transactions table
