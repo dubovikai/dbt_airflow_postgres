@@ -25,7 +25,7 @@ with DAG(
         task_id="create_raw_transactions_table",
         conn_id='postgres_default',
         sql="""
-            DROP TABLE IF EXISTS bronze.raw_transactions;
+            DROP TABLE IF EXISTS bronze.raw_transactions CASCADE;
             CREATE TABLE bronze.raw_transactions (
                 transaction_id VARCHAR,
                 customer_id VARCHAR,
