@@ -1,0 +1,40 @@
+name: 'corp_dbt_project'
+version: '1.0.0'
+config-version: 2
+
+profile: 'dbt-public-profile'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+models:
+  corp_dbt_project:
+    bronze:
+      schema: bronze
+    silver:
+      schema: silver
+    # gold:
+    #   schema: gold
+
+# snapshots:
+#   corp_dbt_project:
+#     target_schema: silver
+
+# seeds:
+#   corp_dbt_project:
+#     delimiter: ","
+#     schema: silver
+
+data_tests:
+  store_failures: true
+
+flags:
+  send_anonymous_usage_stats: false 

@@ -1,0 +1,19 @@
+version: 2
+
+groups:
+  - name: finance
+    owner:
+      name: Great Colleague
+      email: finance@jaffleshop.com
+      slack: finance-data
+
+sources:
+  - name: bronze_layer
+    description: Bronze schema from DWH
+    database: "{{ env_var('PG_DB_NAME') }}"
+    schema: bronze
+    tables:
+      - name: transactions_raw_bronze
+        identifier: raw_transactions
+        description: >
+          One record per transaction
