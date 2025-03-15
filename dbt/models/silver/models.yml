@@ -1,8 +1,8 @@
 version: 2
 
 models:
-  - name: transactions_silver
-    description: Cleaned transaction data
+  - name: fct_transactions_silver
+    description: Cleaned transaction data.
     config:
       contract:
         enforced: true
@@ -27,9 +27,8 @@ models:
         data_type: INTEGER
         constraints:
           - type: not_null
-      - name: product_name
-        description: Name of the product
-        data_type: TEXT
+          - type: foreign_key
+            expression: "silver.dim_products_silver (product_id)"
       - name: quantity
         description: Number of units sold
         data_type: INTEGER
@@ -45,3 +44,18 @@ models:
         data_type: REAL
         constraints:
           - type: not_null
+
+  - name: dim_products_silver
+    description: Cleaned set of products.
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: product_id
+        description: Unique identifier for each product
+        data_type: INTEGER
+        constraints:
+          - type: primary_key
+      - name: product_name
+        description: Name of the product
+        data_type: TEXT

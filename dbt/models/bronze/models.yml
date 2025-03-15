@@ -1,0 +1,88 @@
+version: 2
+
+models:
+  - name: dim_products_bronze
+    description: "Dimension table containing products."
+    columns:
+      - name: product_id
+        description: "Identifier for the product being purchased."
+      - name: product_name
+        description: "Name of the product being purchased."
+      - name: import_status
+        description: "Status of the import process."
+
+  - name: dim_products_fallback_bronze
+    description: "Contains products with import errors from fct_transactions_bronze."
+    data_tests:
+      - test_fallback
+    columns:
+      - name: import_status
+        description: "Status of the import process (should not be 'OK' in this table)."
+      - name: product_id
+        description: "Identifier for the product being purchased."
+      - name: product_name
+        description: "Name of the product being purchased."
+
+  - name: fct_transactions_bronze
+    description: "Fact table containing transactions enriched with product details."
+    columns:
+      - name: transaction_id
+        description: "Unique identifier for each transaction."
+      - name: customer_id
+        description: "Identifier of the customer making the transaction."
+      - name: transaction_date
+        description: "Date when the transaction occurred."
+      - name: product_id
+        description: "Identifier for the product being purchased."
+      - name: product_name
+        description: "Name of the product being purchased."
+      - name: quantity
+        description: "Number of units purchased."
+      - name: price
+        description: "Total price of the transaction."
+      - name: tax
+        description: "Tax amount applied to the transaction."
+      - name: import_status
+        description: "Status of the import process."
+
+  - name: fct_transactions_fallback_bronze
+    description: "Contains transactions with import errors from fct_transactions_bronze."
+    data_tests:
+      - test_fallback
+    columns:
+      - name: import_status
+        description: "Status of the import process (should not be 'OK' in this table)."
+      - name: transaction_id
+        description: "Unique identifier for each transaction."
+      - name: customer_id
+        description: "Identifier of the customer making the transaction."
+      - name: transaction_date
+        description: "Date when the transaction occurred."
+      - name: product_id
+        description: "Identifier for the product being purchased."
+      - name: quantity
+        description: "Number of units purchased."
+      - name: price
+        description: "Total price of the transaction."
+      - name: tax
+        description: "Tax amount applied to the transaction."
+
+  - name: raw_transactions_bronze
+    description: "Raw transaction data ingested from the source system with initial cleansing."
+    columns:
+      - name: transaction_id
+        description: "Unique identifier for each transaction."
+      - name: customer_id
+        description: "Identifier of the customer making the transaction."
+      - name: transaction_date
+        description: "Date when the transaction occurred."
+      - name: product_id
+        description: "Identifier for the product being purchased."
+      - name: product_name
+        description: "Name of the product being purchased."
+      - name: quantity
+        description: "Number of units purchased."
+      - name: price
+        description: "Total price of the transaction."
+      - name: tax
+        description: "Tax amount applied to the transaction."

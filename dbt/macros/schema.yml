@@ -1,0 +1,31 @@
+version: 2
+
+macros:
+  - name: generate_schema_name
+    description: |
+      Generates the schema name based on the provided `custom schema name` or `defaults` to the target schema.
+
+      Returns:
+        str: The resolved schema name.
+    arguments:
+      - name: custom_schema_name
+        type: str or None
+        description: The custom schema name, if provided
+      - name: node
+        type: dict
+        description: The dbt node object (unused but included for compatibility).
+
+  - name: check_constraints
+    description: |
+      Checks constraints on the specified destination model and updates import status.
+
+      This macro performs the following operations:
+      1. Finds the metadata for the specified destination model in the graph.
+      2. Adds an `import_status` column to the target table if it does not exist.
+      3. Creates a temporary table with constraints defined in the destination model.
+      4. Iterates over each record in the target table and attempts to insert it into the temporary table.
+      5. Updates `import_status` to 'OK' for successful inserts and logs errors for failed ones.
+    arguments:
+      - name: destination_model_name
+        type: str
+        description: The name of the destination model whose constraints will be checked.

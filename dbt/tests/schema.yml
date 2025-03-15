@@ -1,0 +1,16 @@
+version: 2
+
+tests:
+  - name: test_fallback
+    description: |
+      This DBT test checks whether the given model contains any records.
+    arguments:
+      - name: model
+        type: dbt model reference
+        description: The DBT model to be tested.
+
+  - name: test_transaction_taxes
+    description: >
+      This test checks for invalid transactions where the tax amount exceeds the total price. 
+      Such cases may indicate data quality issues, incorrect tax calculations, or upstream data 
+      ingestion errors. If any records are returned, further investigation is required.

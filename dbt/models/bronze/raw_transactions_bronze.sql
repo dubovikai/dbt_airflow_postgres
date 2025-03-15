@@ -1,10 +1,3 @@
-{{ config(
-    materialized='table',
-    post_hook=[
-        "{{ check_constraints('transactions_silver') }}"
-    ]
-) }}
-
 WITH csv_null_handle_cte AS (
     SELECT
         NULLIF(transaction_id, '') AS transaction_id,
@@ -36,8 +29,6 @@ SELECT
 
     REPLACE(price, 'Two Hundred', '200') AS price,
 
-    REPLACE(tax, 'Fifteen', '15') AS tax,
-
-    NULL AS import_status
+    REPLACE(tax, 'Fifteen', '15') AS tax
 
 FROM csv_null_handle_cte

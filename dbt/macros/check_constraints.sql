@@ -34,8 +34,7 @@
         UPDATE {{ this }} SET import_status = NULL;
 
         {% set temp_table_name = this.identifier ~ '__tmp' %}
-
-        CREATE TEMP TABLE {{ temp_table_name }} (
+        CREATE TABLE {{ temp_table_name }} (
             {%- set raw_column_constraints = adapter.render_raw_columns_constraints(raw_columns=found_node['columns']) -%}
             {%- set raw_model_constraints = adapter.render_raw_model_constraints(raw_constraints=found_node['constraints']) -%}
 
@@ -43,8 +42,7 @@
             {%- if raw_model_constraints -%}
                 , {{ raw_model_constraints | join(', ') }}
             {%- endif -%}
-        )
-        ON COMMIT DROP;
+        );
 
         FOR rec IN (
             SELECT ctid, {{ found_node['columns'].keys() | join(', ') }} FROM {{ this }}
@@ -64,6 +62,7 @@
                 UPDATE {{ this }} SET import_status = 'ERR: ' || err_code || ': ' || msg_text WHERE ctid = rec.ctid;
             END;
         END LOOP;
+    DROP TABLE {{ temp_table_name }};
     END;
     $$;
 {% endmacro %}
