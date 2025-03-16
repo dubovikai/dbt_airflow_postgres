@@ -11,6 +11,10 @@ To start the project locally, execute the following command in the root director
 ```sh
 docker compose up
 ```
+```
+http://localhost:8080
+log/pass: airflow
+```
 
 DBT model development can be conducted using the console.
 
