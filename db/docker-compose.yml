@@ -2,7 +2,7 @@ services:
   db:
     image: postgres
     container_name: test_dwh_db_host
-    restart: always
+    restart: unless-stopped
     ports:
       - ${PG_DB_PORT}:5432
     environment:
