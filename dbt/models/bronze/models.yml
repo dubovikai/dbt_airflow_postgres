@@ -34,8 +34,6 @@ models:
         description: "Date when the transaction occurred."
       - name: product_id
         description: "Identifier for the product being purchased."
-      - name: product_name
-        description: "Name of the product being purchased."
       - name: quantity
         description: "Number of units purchased."
       - name: price
