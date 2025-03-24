@@ -1,0 +1,53 @@
+version: 2
+exposures:
+  - name: first_dashboard
+    label: First Dashboard
+    description: '### Dashboard Cards: 1
+
+
+      No description provided in Metabase
+
+
+      #### Metadata
+
+
+      Metabase ID: __2__
+
+
+      Created On: __2025-03-24T11:41:59.161344Z__'
+    type: dashboard
+    url: http://localhost:3000/dashboard/2
+    maturity: medium
+    owner:
+      name: Andrey Dubovik
+      email: user@localhost.host
+    depends_on:
+      - ref('dim_products_silver')
+      - ref('fct_transactions_silver')
+  - name: total_and_average_products_revenue
+    label: Total and Average products revenue
+    description: '### Visualization: Bar
+
+
+      Simple sum and avg of product prices
+
+
+      #### Metadata
+
+
+      Metabase ID: __38__
+
+
+      Created On: __2025-03-24T11:41:36.914438Z__'
+    type: analysis
+    url: http://localhost:3000/card/38
+    maturity: medium
+    owner:
+      name: Andrey Dubovik
+      email: user@localhost.host
+    depends_on:
+      - ref('dim_products_silver')
+      - ref('fct_transactions_silver')
+    meta:
+      average_query_time: '0:00.049'
+      last_used_at: '2025-03-24T12:03:00.308965Z'

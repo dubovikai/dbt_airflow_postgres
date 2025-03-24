@@ -1,3 +1,5 @@
 include:
   - airflow/airflow-docker-compose.yaml
   - db/docker-compose.yml
+  - frontend/metabase/docker-compose.yml
+  - frontend/jupyter/docker-compose.yml

@@ -1,0 +1,11 @@
+     
+
+services:
+  jupyter:
+    image: jupyter/scipy-notebook:latest
+    container_name: jupyter-lab
+    ports:
+      - 8888:8888
+    volumes:
+      - ./notebooks:/home/jovyan/work/notebooks
+      - ./sources:/home/jovyan/work/sources

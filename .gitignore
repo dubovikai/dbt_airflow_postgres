@@ -1,6 +1,7 @@
 # Caches
 __pycache__
 dbt_packages
+.ipynb_checkpoints
 
 # logs
 airflow/logs/*
